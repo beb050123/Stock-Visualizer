@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import eu.hansolo.tilesfx.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.financeplayground.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <Label fx:id="welcomeText" text="Input a date"/>
+    <TextField fx:id="dateField" promptText="yyyy-mm-dd"/>
+    <Button text="Submit" onMouseClicked="#submitButtonAction"/>
+
+
+
+
+    <GridPane>
+        <children>
+            <Tile fx:id="stockOpen" skinType="NUMBER" title="Open" value="0.0"  />
+            <Tile fx:id="stockLow" skinType="NUMBER" title="Close" value="0.0"  />
+            <Tile fx:id="stockChange"  skinType="NUMBER" title="Percent Change" value="0"   />
+        </children>
+
+
+
+    </GridPane>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</VBox>
+
+
+
+
