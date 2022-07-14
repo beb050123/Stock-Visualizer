@@ -1,67 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.TextField?>
-<?import eu.hansolo.tilesfx.*?>
 
-        <?import org.controlsfx.control.textfield.TextFields?>
+<SplitPane fx:controller="com.example.financeplayground.HelloController" dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1129.0" xmlns:fx="http://javafx.com/fxml/1" >
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-border-radius: 0;">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Stock Selection">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="161.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" layoutX="48.0" layoutY="14.0" text="Enter a Ticker" />
+                                    <TextField fx:id="tickerSelection" layoutX="6.0" layoutY="39.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Time Interval">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <DatePicker fx:id="firstDate" layoutX="9.0" layoutY="50.0" prefHeight="11.0" prefWidth="143.0" />
+                                    <Label layoutX="53.0" layoutY="24.0" text="First Date" />
+                                    <Label layoutX="45.0" layoutY="96.0" text="Second Date" />
+                                    <DatePicker fx:id="secondDate" layoutX="7.0" layoutY="128.0" prefHeight="25.0" prefWidth="144.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Submit" />
+               </children>
+            </VBox>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="677.0" prefWidth="948.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TilePane hgap="30.0" layoutX="39.0" layoutY="68.0" prefHeight="260.0" prefWidth="836" alignment="CENTER" translateX="10"  >
 
-<?import javafx.scene.layout.TilePane?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.financeplayground.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-    <Label fx:id="welcomeText" text="Input a date"/>
-    <TextField fx:id="dateField" promptText="yyyy-mm-dd"/>
-    <Button text="Submit" onMouseClicked="#submitButtonAction"/>
-
-
-
-
-    <GridPane>
-        <TilePane hgap="5.0">
-            <children>
-                <Tile fx:id="stockOpen" skinType="NUMBER" title="Open" value="0.0" unit="USD" />
-                <Tile fx:id="stockClose" skinType="NUMBER" title="Close" value="0.0" unit="USD" />
-                <Tile fx:id="stockChange"  skinType="NUMBER" title="Percent Change" value="0.0" unit="%"  />
-            </children>
-        </TilePane>
-
-
-
-
-
-
-
-    </GridPane>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</VBox>
-
-
-
-
+                        </TilePane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
+                     <children>
+                        <LineChart layoutX="-3.0" layoutY="-1.0" prefHeight="335.0" prefWidth="946.0">
+                          <xAxis>
+                            <CategoryAxis label="Dates" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="Price" side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
