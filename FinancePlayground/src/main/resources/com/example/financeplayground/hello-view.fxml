@@ -9,6 +9,9 @@
 <?import javafx.scene.control.TextField?>
 <?import eu.hansolo.tilesfx.*?>
 
+        <?import org.controlsfx.control.textfield.TextFields?>
+
+<?import javafx.scene.layout.TilePane?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.financeplayground.HelloController">
     <padding>
@@ -22,11 +25,17 @@
 
 
     <GridPane>
-        <children>
-            <Tile fx:id="stockOpen" skinType="NUMBER" title="Open" value="0.0"  />
-            <Tile fx:id="stockLow" skinType="NUMBER" title="Close" value="0.0"  />
-            <Tile fx:id="stockChange"  skinType="NUMBER" title="Percent Change" value="0"   />
-        </children>
+        <TilePane hgap="5.0">
+            <children>
+                <Tile fx:id="stockOpen" skinType="NUMBER" title="Open" value="0.0" unit="USD" />
+                <Tile fx:id="stockClose" skinType="NUMBER" title="Close" value="0.0" unit="USD" />
+                <Tile fx:id="stockChange"  skinType="NUMBER" title="Percent Change" value="0.0" unit="%"  />
+            </children>
+        </TilePane>
+
+
+
+
 
 
 
