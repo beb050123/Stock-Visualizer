@@ -66,24 +66,37 @@ public class DataProcessing {
 
 
 
+    }
 
-
-
-
-
-
-
-
-
+    public static double getStockOpen(String date) {
+        double open = 0.0;
+        HashMap<String, ArrayList<String>> data = getData();
+        for (String key : data.keySet()) {
+            if (key.equals(date)) {
+                open = Double.parseDouble(data.get(key).get(0));
+            }
+        }
+        return open;
     }
 
 
+    public static double getStockClose(String date) {
+        double close = 0.0;
+        HashMap<String, ArrayList<String>> data = getData();
+        for (String key : data.keySet()) {
+            if (key.equals(date)) {
+                close = Double.parseDouble(data.get(key).get(3));
+            }
+        }
+        return close;
+    }
 
-
-
-
-
-
+    public static double getStockChange(String date) {
+        double open = getStockOpen(date);
+        double close = getStockClose(date);
+        double percentageChange = (close - open) / open;
+        return percentageChange;
+    }
 }
 
 
