@@ -12,7 +12,7 @@ import java.util.*;
 public class DataProcessing {
 
 
-    // format the data into a hashmap
+
     public static HashMap<String, ArrayList<String>> getData() {
         HashMap<String, ArrayList<String>> data = new HashMap<String, ArrayList<String>>();
         String url = "https://data.nasdaq.com/api/v3/datasets/WIKI/AAPL.csv?api_key=wcWkYaN6xeyyAS7jCxRC";
@@ -35,11 +35,13 @@ public class DataProcessing {
     }
 
 
-    public static void getDates(HashMap<String, ArrayList<String>> data) {
-        Set<String> keys = data.keySet();
-        for (String key : keys) {
-            System.out.println(key);
+
+    public static Set<String> getDates(HashMap<String, ArrayList<String>> data) {
+        Set<String> dates = new HashSet<String>();
+        for (String key : data.keySet()) {
+            dates.add(key);
         }
+        return dates;
     }
 
 
@@ -91,12 +93,6 @@ public class DataProcessing {
         return close;
     }
 
-    public static double getStockChange(String date) {
-        double open = getStockOpen(date);
-        double close = getStockClose(date);
-        double percentageChange = (close - open) / open;
-        return percentageChange;
-    }
 }
 
 
