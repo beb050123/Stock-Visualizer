@@ -9,6 +9,12 @@ import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeMap;
+
+
 
 public class HelloController {
 
@@ -17,6 +23,7 @@ public class HelloController {
     private Label welcomeText;
     @FXML
     DataProcessing dataProcessing = new DataProcessing();
+
 
 
      @FXML
@@ -36,21 +43,39 @@ public class HelloController {
 
     @FXML
     public void submitButtonAction(MouseEvent event) {
-        if (tickerSelection.getText().isEmpty()) {
 
 
-        } else if (!tickerSelection.getText().matches("\\d{4}-\\d{2}-\\d{2}")) {
+        String fdate = firstDate.getValue().toString();
+        String sdate = secondDate.getValue().toString();
 
-        } else {
+        TreeMap<String, ArrayList<String>> stockInfo = dataProcessing.getStockInfo(dataProcessing.getData(), fdate, sdate);
 
-            initialize();
+        for (String key : stockInfo.keySet()) {
+            System.out.println(key + ": " + stockInfo.get(key));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @FXML
     public void initialize() {
 
     }
+
+
+
+
 
 
 
