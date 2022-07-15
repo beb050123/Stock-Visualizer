@@ -63,12 +63,12 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
                      <children>
-                        <LineChart layoutX="-3.0" layoutY="-1.0" prefHeight="335.0" prefWidth="946.0">
+                        <LineChart layoutX="-3.0" layoutY="-1.0" prefHeight="335.0" prefWidth="946.0" fx:id="stockGraph">
                           <xAxis>
-                            <CategoryAxis label="Dates" side="BOTTOM" />
+                            <CategoryAxis label="Dates" side="BOTTOM" fx:id="graphXAxis" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis label="Price" side="LEFT" />
+                            <NumberAxis label="Price" side="LEFT" fx:id="graphYAxis"/>
                           </yAxis>
                         </LineChart>
                      </children>
