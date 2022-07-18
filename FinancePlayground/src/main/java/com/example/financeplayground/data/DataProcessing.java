@@ -62,55 +62,9 @@ public class DataProcessing {
 
 
 
-    public static ArrayList<String> getStockInfo(TreeMap<String, ArrayList<String>> data, String date) {
-        String open = "";
-        String high = "";
-        String low = "";
-        String close = "";
-        String volume = "";
-
-        ArrayList<String> stockInfo = new ArrayList<>();
-        for (String key : data.keySet()) {
-            if (key.equals(date)) {
-                open = data.get(key).get(1);
-                high = data.get(key).get(2);
-                low = data.get(key).get(3);
-                close = data.get(key).get(4);
-                volume = data.get(key).get(5);
-                stockInfo.add(open);
-                stockInfo.add(high);
-                stockInfo.add(low);
-                stockInfo.add(close);
-                stockInfo.add(volume);
-            }
-        }
-
-        return stockInfo;
-
-    }
-
-    public static double getStockOpen(String date) {
-        double open = 0.0;
-        TreeMap<String, ArrayList<String>> data = getData();
-        for (String key : data.keySet()) {
-            if (key.equals(date)) {
-                open = Double.parseDouble(data.get(key).get(0));
-            }
-        }
-        return open;
-    }
 
 
-    public static double getStockClose(String date) {
-        double close = 0.0;
-        TreeMap<String, ArrayList<String>> data = getData();
-        for (String key : data.keySet()) {
-            if (key.equals(date)) {
-                close = Double.parseDouble(data.get(key).get(3));
-            }
-        }
-        return close;
-    }
+
 
 }
 
