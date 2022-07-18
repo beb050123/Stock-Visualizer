@@ -26,12 +26,8 @@ public class HelloController {
 
 
 
-     @FXML
-     private Tile stockOpen;
     @FXML
-     private Tile stockClose;
-    @FXML
-    private Tile stockChange;
+    private boolean reset = true;
     @FXML
     private DatePicker firstDate;
 
@@ -43,6 +39,11 @@ public class HelloController {
     @FXML
     private LineChart stockGraph;
 
+    @FXML
+    public void setReset() {
+        stockGraph.getData().clear();
+
+    }
 
     @FXML
     public void submitButtonAction(MouseEvent event) {
@@ -50,57 +51,36 @@ public class HelloController {
 
         String fdate = firstDate.getValue().toString();
         String sdate = secondDate.getValue().toString();
-
         TreeMap<String, ArrayList<String>> stockInfo = dataProcessing.getStockInfo(dataProcessing.getData(), fdate, sdate);
-        LinkedList<String> priceList = new LinkedList<>();
-
         XYChart.Series<String, Double> series = new XYChart.Series<>();
-        series.setName("Stock Price");
-        stockGraph.getData().add(series);
-        stockGraph.animatedProperty().set(false);
-
-        for (String key : stockInfo.keySet()) {
-            series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).get(3))));
-            priceList.add(stockInfo.get(key).get(3));
-        }
 
 
+            series.setName("Stock Price");
+            stockGraph.getData().add(series);
 
 
+            for (String key : stockInfo.keySet()) {
+                series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).get(3))));
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            setGraphStyle(series);
 
 
     }
 
+
+
     @FXML
     public void initialize() {
 
+    }
+
+    @FXML
+    public void setGraphStyle(XYChart.Series<String, Double> series) {
+        for (XYChart.Data<String, Double> data : series.getData()) {
+            data.getNode().setStyle("-fx-shape: circle;");
+        }
+        graphYAxis.setTickLabelFont(graphYAxis.getTickLabelFont().font("Arial", 10));
     }
 
 
