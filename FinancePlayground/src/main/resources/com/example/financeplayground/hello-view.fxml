@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<SplitPane fx:controller="com.example.financeplayground.HelloController" dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1129.0" xmlns:fx="http://javafx.com/fxml/1" >
+<SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1129.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-border-radius: 0;">
          <children>
@@ -47,7 +46,8 @@
                       </TitledPane>
                     </panes>
                   </Accordion>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Submit" onMouseClicked="#submitButtonAction" />
+                  <Button mnemonicParsing="false" onMouseClicked="#submitButtonAction" prefHeight="25.0" prefWidth="124.0" text="Submit" />
+                  <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#setReset" prefHeight="25.0" prefWidth="124.0" text="Reset" />
                </children>
             </VBox>
          </children></AnchorPane>
@@ -57,18 +57,19 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TilePane hgap="30.0" layoutX="39.0" layoutY="68.0" prefHeight="260.0" prefWidth="836" alignment="CENTER" translateX="10"  />
+                        <TilePane alignment="CENTER" hgap="30.0" layoutX="39.0" layoutY="68.0" prefHeight="260.0" prefWidth="836" translateX="10">
+                        </TilePane>
 
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
                      <children>
-                        <LineChart layoutX="-3.0" layoutY="-1.0" prefHeight="335.0" prefWidth="946.0" fx:id="stockGraph">
+                        <LineChart fx:id="stockGraph" focusTraversable="true" layoutX="-3.0" layoutY="-1.0" prefHeight="335.0" prefWidth="946.0">
                           <xAxis>
-                            <CategoryAxis label="Dates" side="BOTTOM" fx:id="graphXAxis" />
+                            <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis label="Price" side="LEFT" fx:id="graphYAxis"/>
+                            <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT" />
                           </yAxis>
                         </LineChart>
                      </children>
