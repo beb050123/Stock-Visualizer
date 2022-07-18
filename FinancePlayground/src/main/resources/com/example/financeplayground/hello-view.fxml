@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -13,6 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.QuadCurve?>
 
 <SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1129.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
   <items>
@@ -64,14 +67,34 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
                      <children>
-                        <LineChart fx:id="stockGraph" layoutX="-3.0" layoutY="-1.0" onMouseEntered="#onMouseOver" prefHeight="335.0" prefWidth="946.0">
+                        <LineChart fx:id="stockGraph" layoutX="-3.0" layoutY="-1.0" onMouseMoved="#onMouseOver" prefHeight="335.0" prefWidth="946.0">
                           <xAxis>
                             <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT" />
                           </yAxis>
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
                         </LineChart>
+                        <VBox fx:id="infoPopUp" alignment="CENTER" layoutX="159.0" layoutY="52.0" visible="false">
+                           <children>
+                              <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
+                                 <children>
+                                    <Label fx:id="dateLabel" text="Date:" textFill="WHITE"  />
+                                    <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </VBox>
+                              <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
               </items>
