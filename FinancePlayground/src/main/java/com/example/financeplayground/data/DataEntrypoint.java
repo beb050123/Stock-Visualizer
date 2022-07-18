@@ -14,7 +14,7 @@ public class DataEntrypoint {
     public static void main(String[] args) throws FileNotFoundException {
 
 
-        // print out sorted data
+
         TreeMap<String, ArrayList<String>> data = DataProcessing.getData();
         TreeMap<String, ArrayList<String>> sortedData = DataProcessing.sortData(data);
         for (String key : sortedData.keySet()) {
