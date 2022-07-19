@@ -12,12 +12,13 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.QuadCurve?>
 
-<SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1129.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
+<SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-border-radius: 0;">
          <children>
@@ -56,18 +57,11 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="677.0" prefWidth="948.0">
+            <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="677.0" prefWidth="1012.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TilePane alignment="CENTER" hgap="30.0" layoutX="39.0" layoutY="68.0" prefHeight="260.0" prefWidth="836" translateX="10">
-                        </TilePane>
-
-                     </children>
-                  </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
                      <children>
-                        <LineChart fx:id="stockGraph" layoutX="-3.0" layoutY="-1.0" onMouseMoved="#onMouseOver" prefHeight="335.0" prefWidth="946.0">
+                        <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="629.0" prefWidth="1018.0">
                           <xAxis>
                             <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
                           </xAxis>
@@ -82,7 +76,7 @@
                            <children>
                               <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
                                  <children>
-                                    <Label fx:id="dateLabel" text="Date:" textFill="WHITE"  />
+                                    <Label fx:id="dateLabel" text="Date:" textFill="WHITE" />
                                     <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
                                  </children>
                                  <cursor>
@@ -97,6 +91,16 @@
                         </VBox>
                      </children>
                   </AnchorPane>
+                  <ToolBar prefHeight="40.0" prefWidth="1025.0">
+                     <items>
+                        <ToggleButton mnemonicParsing="false" text="Clear" />
+                        <ToggleButton mnemonicParsing="false" text="SMA" />
+                        <ToggleButton mnemonicParsing="false" text="EMA" />
+                        <ToggleButton mnemonicParsing="false" text="β" />
+                        <ToggleButton mnemonicParsing="false" text="MACD" />
+                        <ToggleButton mnemonicParsing="false" text="RSI" />
+                     </items>
+                  </ToolBar>
               </items>
             </SplitPane>
          </children></AnchorPane>
