@@ -15,17 +15,6 @@ public class DataEntrypoint {
 
 
 
-        TreeMap<String, ArrayList<String>> data = DataProcessing.getData();
-        TreeMap<String, ArrayList<String>> sortedData = DataProcessing.sortData(data);
-        for (String key : sortedData.keySet()) {
-            System.out.println(key + ": " + sortedData.get(key));
-        }
-
-        DataProcessing.getDates(DataProcessing.getData());
-        String date = UserInput.getDate();
-
-
-
 
     }
 }
