@@ -20,8 +20,7 @@ public class HelloController {
 
     public CategoryAxis graphXAxis;
     public NumberAxis graphYAxis;
-    @FXML
-    DataProcessing dataProcessing = new DataProcessing();
+
     @FXML
     private Label dateLabel;
     @FXML
@@ -31,7 +30,7 @@ public class HelloController {
 
 
     @FXML
-    private boolean reset = true;
+    private final boolean reset = true;
     @FXML
     private DatePicker firstDate;
 
@@ -39,7 +38,11 @@ public class HelloController {
     private DatePicker secondDate;
 
     @FXML
-    private TextField tickerSelection;
+    DataProcessing dataProcessing = new DataProcessing();
+    @FXML
+    TreeMap<String, ArrayList<String>> data = dataProcessing.getData();
+
+
     @FXML
     private LineChart stockGraph;
 
@@ -47,6 +50,7 @@ public class HelloController {
     public void setReset() {
         stockGraph.getData().clear();
     }
+
     @FXML
     Node chartBackground;
 
@@ -61,16 +65,11 @@ public class HelloController {
 
         fdate = firstDate.getValue().toString();
         sdate = secondDate.getValue().toString();
-        stockInfo = dataProcessing.getStockInfo(dataProcessing.getData(), fdate, sdate);
+        stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
         series = new XYChart.Series<>();
         series.setName("Stock Price");
         stockGraph.getData().add(series);
         chartBackground = stockGraph.lookup(".chart-plot-background");
-
-
-
-
-
 
         for (String key : stockInfo.keySet()) {
             series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).get(3))));
@@ -94,82 +93,24 @@ public class HelloController {
 
 
 
+
+
+
     @FXML
     public void onMouseOver(MouseEvent event) {
-
-
-
-
         chartBackground.setOnMouseMoved(e -> {
-            dateLabel.setText("Date: "+graphXAxis.getValueForDisplay(e.getX()));
+            dateLabel.setText("Date: " + graphXAxis.getValueForDisplay(e.getX()));
             for (XYChart.Data<String, Double> data : series.getData()) {
                 if (data.getXValue().equals(graphXAxis.getValueForDisplay(e.getX()))) {
-                    priceLabel.setText("Price: "+String.valueOf(data.getYValue()));
-                    infoPopUp.setLayoutX(data.getNode().getLayoutX()+10);
+                    priceLabel.setText("Price: " + data.getYValue());
+                    infoPopUp.setLayoutX(data.getNode().getLayoutX() + 10);
                     infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
                 }
             }
-
-
-
-            //TODO - add finishing touches to the info pop up
-
-
             infoPopUp.setVisible(true);
 
-
-
-
-
-
-
-            System.out.println("Mouse at : " + graphXAxis.getValueForDisplay(e.getX()) + " " +
-                    graphYAxis.getValueForDisplay(e.getY()));
         });
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
