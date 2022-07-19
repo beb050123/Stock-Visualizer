@@ -99,18 +99,20 @@ public class HelloController {
 
 
 
+
         chartBackground.setOnMouseMoved(e -> {
             dateLabel.setText("Date: "+graphXAxis.getValueForDisplay(e.getX()));
             for (XYChart.Data<String, Double> data : series.getData()) {
                 if (data.getXValue().equals(graphXAxis.getValueForDisplay(e.getX()))) {
                     priceLabel.setText("Price: "+String.valueOf(data.getYValue()));
-                    infoPopUp.setLayoutX(data.getNode().getLayoutX());
-                    infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight() + 5);
+                    infoPopUp.setLayoutX(data.getNode().getLayoutX()+10);
+                    infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
                 }
             }
 
 
 
+            //TODO - add finishing touches to the info pop up
 
 
             infoPopUp.setVisible(true);
