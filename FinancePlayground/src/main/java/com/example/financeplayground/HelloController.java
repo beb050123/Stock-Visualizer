@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import java.text.ParseException;
 import java.util.*;
 
+import static com.example.financeplayground.data.DataProcessing.*;
+
 public class HelloController {
 
   public CategoryAxis graphXAxis;
@@ -27,7 +29,8 @@ public class HelloController {
   @FXML private DatePicker secondDate;
 
   @FXML DataProcessing dataProcessing = new DataProcessing();
-  @FXML TreeMap<String, ArrayList<String>> data = dataProcessing.getData();
+  @FXML TreeMap<String, ArrayList<String>> data = getData();
+
 
   @FXML private LineChart stockGraph;
 
@@ -98,14 +101,21 @@ public class HelloController {
         });
   }
 
-  public void handleGet50SMA(MouseEvent event)  {
+  public void handleGet50SMA(MouseEvent event) throws ParseException {
 
+    fdate = firstDate.getValue().toString();
+    sdate = secondDate.getValue().toString();
+    stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
+    XYChart.Series<String, Double> series = new XYChart.Series<>();
+    TreeMap<String, Double> get50DaySMA = dataProcessing.makeSMAMap(stockInfo);
 
-
-
-
-
-
+  series.setName("50 Day SMA");
+  stockGraph.getData().add(series);
+    for (String key : get50DaySMA.keySet()) {
+      series.getData().add(new XYChart.Data<>(key, get50DaySMA.get(key)));
+    }
+    System.out.println(get50DaySMA);
+    setGraphStyle(series);
 
   }
 
