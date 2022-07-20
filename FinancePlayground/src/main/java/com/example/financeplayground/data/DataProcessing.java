@@ -1,7 +1,9 @@
 package com.example.financeplayground.data;
 
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.*;
+import java.text.SimpleDateFormat;
 
 public class DataProcessing {
 
@@ -35,5 +37,31 @@ public class DataProcessing {
       }
     }
     return stockInfo;
+  }
+
+  public static void getSMA(TreeMap<String, ArrayList<String>> data, int period)
+      throws ParseException {
+
+    Stack<Date> dates = new Stack<>();
+    String firstDate = data.keySet().iterator().next();
+
+    // TODO - refactor once I get data from Yahoo API
+    String secondToLastDate = data.keySet().toArray()[data.keySet().size() - 2].toString();
+    Date lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(secondToLastDate);
+    dates.push(new SimpleDateFormat("yyyy-MM-dd").parse(firstDate));
+    Calendar c = Calendar.getInstance();
+
+    for (String key : data.keySet()) {
+
+      c.setTime(dates.pop());
+      if (c.getTime().compareTo(lastDate) < 0) {
+        System.out.println("Start Date:" + c.getTime());
+        c.add(Calendar.DATE, period);
+        dates.push(c.getTime());
+        System.out.println("End Date:" + c.getTime());
+      } else {
+        break;
+      }
+    }
   }
 }
