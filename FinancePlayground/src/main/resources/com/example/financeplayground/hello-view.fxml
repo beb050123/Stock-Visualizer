@@ -11,111 +11,89 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" prefHeight="673.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/18"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
+<SplitPane dividerPositions="0.15616681455190773" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-border-radius: 0;">
             <children>
-                <VBox alignment="TOP_CENTER" layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity"
-                      prefHeight="675.0" prefWidth="163.0" spacing="10.0" AnchorPane.leftAnchor="5.0"
-                      AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                <VBox alignment="TOP_CENTER" layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                     <children>
-                        <Accordion>
-                            <panes>
-                                <TitledPane animated="false" text="Stock Selection">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="161.0">
-                                            <children>
-                                                <Label contentDisplay="CENTER" layoutX="48.0" layoutY="14.0"
-                                                       text="Enter a Ticker"/>
-                                                <TextField fx:id="tickerSelection" layoutX="6.0" layoutY="39.0"/>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </TitledPane>
-                                <TitledPane animated="false" text="Time Interval">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <DatePicker fx:id="firstDate" layoutX="9.0" layoutY="50.0"
-                                                            prefHeight="11.0" prefWidth="143.0"/>
-                                                <Label layoutX="53.0" layoutY="24.0" text="First Date"/>
-                                                <Label layoutX="45.0" layoutY="96.0" text="Second Date"/>
-                                                <DatePicker fx:id="secondDate" layoutX="7.0" layoutY="128.0"
-                                                            prefHeight="25.0" prefWidth="144.0"/>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </TitledPane>
-                            </panes>
-                        </Accordion>
-                        <Button mnemonicParsing="false" onMouseClicked="#submitButtonAction" prefHeight="25.0"
-                                prefWidth="124.0" text="Submit"/>
-                        <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#setReset" prefHeight="25.0"
-                                prefWidth="124.0" text="Reset"/>
+                        <Accordion />
+                  <Label>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c7cacd" height="5.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                              <Label contentDisplay="CENTER" text="Enter a Ticker" />
+                              <TextField fx:id="tickerSelection" prefHeight="25.0" prefWidth="98.0">
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c7cacd" height="5.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                              <Label text="First Date" />
+                              <DatePicker fx:id="firstDate" prefHeight="11.0" prefWidth="143.0" />
+                              <Label text="Second Date" />
+                              <DatePicker fx:id="secondDate" prefHeight="25.0" prefWidth="144.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c7cacd" height="5.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#submitButtonAction" prefHeight="25.0" prefWidth="124.0" text="Submit" />
+                        <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#setReset" prefHeight="25.0" prefWidth="124.0" text="Reset" />
                     </children>
                 </VBox>
             </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
-                <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="677.0"
-                           prefWidth="1012.0">
+                <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="677.0" prefWidth="1012.0">
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="965.0">
                             <children>
-                                <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="629.0"
-                                           prefWidth="1018.0">
+                                <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="629.0" prefWidth="1010.0">
                                     <xAxis>
-                                        <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM"
-                                                      tickLabelsVisible="false"/>
+                                        <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
                                     </xAxis>
                                     <yAxis>
-                                        <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT"/>
+                                        <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT" />
                                     </yAxis>
                                     <cursor>
-                                        <Cursor fx:constant="CROSSHAIR"/>
+                                        <Cursor fx:constant="CROSSHAIR" />
                                     </cursor>
                                 </LineChart>
-                                <VBox fx:id="infoPopUp" alignment="CENTER" layoutX="159.0" layoutY="52.0"
-                                      visible="false">
+                                <VBox fx:id="infoPopUp" alignment="CENTER" layoutX="159.0" layoutY="52.0" visible="false">
                                     <children>
-                                        <VBox prefHeight="38.0" prefWidth="109.0"
-                                              style="-fx-background-color: grey; -fx-background-radius: 4;">
+                                        <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
                                             <children>
-                                                <Label fx:id="dateLabel" text="Date:" textFill="WHITE"/>
-                                                <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:"
-                                                       textFill="WHITE"/>
+                                                <Label fx:id="dateLabel" text="Date:" textFill="WHITE" />
+                                                <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
                                             </children>
                                             <cursor>
-                                                <Cursor fx:constant="DEFAULT"/>
+                                                <Cursor fx:constant="DEFAULT" />
                                             </cursor>
                                             <padding>
-                                                <Insets left="5.0"/>
+                                                <Insets left="5.0" />
                                             </padding>
                                         </VBox>
-                                        <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0"
-                                                   startY="-47.0" stroke="WHITE" strokeType="INSIDE"/>
+                                        <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
                                     </children>
                                 </VBox>
                             </children>
                         </AnchorPane>
                         <ToolBar prefHeight="40.0" prefWidth="1025.0">
                             <items>
-                                <ToggleButton mnemonicParsing="false" text="Clear"/>
-                                <ToggleButton mnemonicParsing="false" text="SMA"/>
-                                <ToggleButton mnemonicParsing="false" text="EMA"/>
-                                <ToggleButton mnemonicParsing="false" text="β"/>
-                                <ToggleButton mnemonicParsing="false" text="MACD"/>
-                                <ToggleButton mnemonicParsing="false" text="RSI"/>
+                                <ToggleButton mnemonicParsing="false" text="Clear" />
+                                <ToggleButton fx:id="getSMA" mnemonicParsing="false" text="SMA" onMouseClicked="#handleGetSMA" />
+                                <ToggleButton fx:id="getEMA" mnemonicParsing="false" text="EMA" onMouseClicked="#handleGetEMA" />
+                                <ToggleButton fx:id="gteBeta" mnemonicParsing="false" text="β"  />
+                                <ToggleButton fx:id="getMACD" mnemonicParsing="false" text="MACD" onMouseClicked="#handleGetMACD"/>
+                                <ToggleButton fx:id="getRSI" mnemonicParsing="false" text="RSI"  onMouseClicked="#handleGetRSI"/>
                             </items>
                         </ToolBar>
                     </items>
