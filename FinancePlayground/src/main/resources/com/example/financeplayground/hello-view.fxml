@@ -9,9 +9,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -88,12 +89,17 @@
                         </AnchorPane>
                         <ToolBar prefHeight="40.0" prefWidth="1025.0">
                             <items>
-                                <ToggleButton mnemonicParsing="false" text="Clear" />
-                                <ToggleButton fx:id="getSMA" mnemonicParsing="false" text="SMA" onMouseClicked="#handleGetSMA" />
-                                <ToggleButton fx:id="getEMA" mnemonicParsing="false" text="EMA" onMouseClicked="#handleGetEMA" />
-                                <ToggleButton fx:id="gteBeta" mnemonicParsing="false" text="β"  />
-                                <ToggleButton fx:id="getMACD" mnemonicParsing="false" text="MACD" onMouseClicked="#handleGetMACD"/>
-                                <ToggleButton fx:id="getRSI" mnemonicParsing="false" text="RSI"  onMouseClicked="#handleGetRSI"/>
+                        <SplitMenuButton mnemonicParsing="false" text="Indicators">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="50 Day SMA"/>
+                              <MenuItem mnemonicParsing="false" text="200 Day SMA" />
+                            <MenuItem mnemonicParsing="false" text="50 Day EMA" />
+                              <MenuItem mnemonicParsing="false" text="200 Day EMA" />
+                              <MenuItem mnemonicParsing="false" text="MACD" />
+                              <MenuItem mnemonicParsing="false" text="RSI" />
+                          </items>
+                        </SplitMenuButton>
+                        <Button mnemonicParsing="false" text="Clear" onMouseClicked="#handleGet50SMA" />
                             </items>
                         </ToolBar>
                     </items>
