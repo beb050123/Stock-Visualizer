@@ -1,5 +1,7 @@
 package com.example.financeplayground.data;
 
+import javafx.scene.chart.XYChart;
+
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.*;
@@ -118,9 +120,9 @@ public class DataProcessing {
 
       String dateString1 = year + "-" + month + "-" + day;
       StringBuffer sb2 = new StringBuffer(date.get(1).toString());
-      String year2 = sb.substring(24, 28);
-      String month2 = sb.substring(4, 7);
-      String day2 = sb.substring(8, 10);
+      String year2 = sb2.substring(24, 28);
+      String month2 = sb2.substring(4, 7);
+      String day2 = sb2.substring(8, 10);
 
       switch (month2) {
         case "Jan":
@@ -164,21 +166,24 @@ public class DataProcessing {
       formattedsmaDates.add(new ArrayList<>(Arrays.asList(dateString1, dateString2)));
     }
     return formattedsmaDates;
-
   }
 
-  public static void testing() throws ParseException {
+  public static TreeMap<String, Double> makeSMAMap(TreeMap<String, ArrayList<String>> data ) throws ParseException {
 
-    //TODO - fix this
+    ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, 50));
+    ArrayList<Double> prices = new ArrayList<>();
+    TreeMap<String, Double> smaMap = new TreeMap<>();
 
-    System.out.println(makeFormattedDates(getSMA(getStockInfo(getData(), "2018-01-01", "2018-01-31"), 5)));
+    for (ArrayList<String> date : formattedDates) {
+      TreeMap<String, ArrayList<String>> stockInfo = getStockInfo(data, date.get(0), date.get(1));
+      String lastKey = stockInfo.keySet().toArray()[stockInfo.keySet().size() - 1].toString();
+      double sum = 0;
+      for (String key : stockInfo.keySet()) {
+        sum += Double.parseDouble(stockInfo.get(key).get(3));
 
-
-
-
+      }
+      smaMap.put(lastKey, sum / 50);
+    }
+    return smaMap;
   }
-
-
-
-
 }
