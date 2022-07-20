@@ -39,8 +39,10 @@ public class DataProcessing {
     return stockInfo;
   }
 
-  public static void getSMA(TreeMap<String, ArrayList<String>> data, int period)
-      throws ParseException {
+  public static ArrayList<ArrayList<Date>> getSMA(
+      TreeMap<String, ArrayList<String>> data, int period) throws ParseException {
+
+    ArrayList<ArrayList<Date>> sma = new ArrayList<>();
 
     Stack<Date> dates = new Stack<>();
     String firstDate = data.keySet().iterator().next();
@@ -52,16 +54,131 @@ public class DataProcessing {
     Calendar c = Calendar.getInstance();
 
     for (String key : data.keySet()) {
-
       c.setTime(dates.pop());
       if (c.getTime().compareTo(lastDate) < 0) {
-        System.out.println("Start Date:" + c.getTime());
+        Date temp1 = c.getTime();
         c.add(Calendar.DATE, period);
         dates.push(c.getTime());
-        System.out.println("End Date:" + c.getTime());
+        Date temp2 = c.getTime();
+        sma.add(new ArrayList<>(Arrays.asList(temp1, temp2)));
       } else {
         break;
       }
     }
+    return sma;
   }
+
+  public static ArrayList<ArrayList<String>> makeFormattedDates(ArrayList<ArrayList<Date>> dates) {
+    ArrayList<ArrayList<String>> formattedsmaDates = new ArrayList<>();
+    for (ArrayList<Date> date : dates) {
+
+      StringBuffer sb = new StringBuffer(date.get(0).toString());
+      String year = sb.substring(24, 28);
+      String month = sb.substring(4, 7);
+      String day = sb.substring(8, 10);
+
+      switch (month) {
+        case "Jan":
+          month = "01";
+          break;
+        case "Feb":
+          month = "02";
+          break;
+        case "Mar":
+          month = "03";
+          break;
+        case "Apr":
+          month = "04";
+          break;
+        case "May":
+          month = "05";
+          break;
+        case "Jun":
+          month = "06";
+          break;
+        case "Jul":
+          month = "07";
+          break;
+        case "Aug":
+          month = "08";
+          break;
+        case "Sep":
+          month = "09";
+          break;
+        case "Oct":
+          month = "10";
+          break;
+        case "Nov":
+          month = "11";
+          break;
+        case "Dec":
+          month = "12";
+          break;
+      }
+
+      String dateString1 = year + "-" + month + "-" + day;
+      StringBuffer sb2 = new StringBuffer(date.get(1).toString());
+      String year2 = sb.substring(24, 28);
+      String month2 = sb.substring(4, 7);
+      String day2 = sb.substring(8, 10);
+
+      switch (month2) {
+        case "Jan":
+          month2 = "01";
+          break;
+        case "Feb":
+          month2 = "02";
+          break;
+        case "Mar":
+          month2 = "03";
+          break;
+        case "Apr":
+          month2 = "04";
+          break;
+        case "May":
+          month2 = "05";
+          break;
+        case "Jun":
+          month2 = "06";
+          break;
+        case "Jul":
+          month2 = "07";
+          break;
+        case "Aug":
+          month2 = "08";
+          break;
+        case "Sep":
+          month2 = "09";
+          break;
+        case "Oct":
+          month2 = "10";
+          break;
+        case "Nov":
+          month2 = "11";
+          break;
+        case "Dec":
+          month2 = "12";
+          break;
+      }
+      String dateString2 = year2 + "-" + month2 + "-" + day2;
+      formattedsmaDates.add(new ArrayList<>(Arrays.asList(dateString1, dateString2)));
+    }
+    return formattedsmaDates;
+
+  }
+
+  public static void testing() throws ParseException {
+
+    //TODO - fix this
+
+    System.out.println(makeFormattedDates(getSMA(getStockInfo(getData(), "2018-01-01", "2018-01-31"), 5)));
+
+
+
+
+  }
+
+
+
+
 }
