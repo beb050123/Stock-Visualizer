@@ -16,6 +16,7 @@ public class HelloController {
   public CategoryAxis graphXAxis;
   public NumberAxis graphYAxis;
 
+
   @FXML private Label dateLabel;
   @FXML private Label priceLabel;
   @FXML private VBox infoPopUp;
@@ -29,6 +30,8 @@ public class HelloController {
   @FXML TreeMap<String, ArrayList<String>> data = dataProcessing.getData();
 
   @FXML private LineChart stockGraph;
+
+  TreeMap<String, ArrayList<String>> getsma;
 
   @FXML
   public void setReset() {
@@ -48,6 +51,12 @@ public class HelloController {
     stockGraph.setHorizontalGridLinesVisible(false);
     stockGraph.setAnimated(false);
     stockGraph.setLegendVisible(false);
+    graphXAxis.setTickMarkVisible(false);
+
+
+
+
+
   }
 
   @FXML
@@ -65,7 +74,9 @@ public class HelloController {
     for (String key : stockInfo.keySet()) {
       series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).get(3))));
     }
+
     setGraphStyle(series);
+
   }
 
   @FXML
@@ -96,4 +107,26 @@ public class HelloController {
           infoPopUp.setVisible(true);
         });
   }
+
+  public void handleGetSMA(MouseEvent event) {
+
+
+  }
+  public void handleGetEMA(MouseEvent event) {
+
+  }
+  public void handleGetMACD(MouseEvent event) {
+
+
+  }
+  public void handleGetRSI(MouseEvent event) {
+
+
+  }
+
+
+
+
 }
+
+
