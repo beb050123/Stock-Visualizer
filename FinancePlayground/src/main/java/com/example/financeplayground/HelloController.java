@@ -9,13 +9,13 @@ import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
 import javafx.scene.layout.VBox;
 
+import java.text.ParseException;
 import java.util.*;
 
 public class HelloController {
 
   public CategoryAxis graphXAxis;
   public NumberAxis graphYAxis;
-
 
   @FXML private Label dateLabel;
   @FXML private Label priceLabel;
@@ -31,8 +31,6 @@ public class HelloController {
 
   @FXML private LineChart stockGraph;
 
-  TreeMap<String, ArrayList<String>> getsma;
-
   @FXML
   public void setReset() {
     stockGraph.getData().clear();
@@ -46,22 +44,16 @@ public class HelloController {
   XYChart.Series<String, Double> series;
 
   @FXML
-  public void initialize(){
+  public void initialize() {
     stockGraph.setVerticalGridLinesVisible(false);
     stockGraph.setHorizontalGridLinesVisible(false);
     stockGraph.setAnimated(false);
     stockGraph.setLegendVisible(false);
     graphXAxis.setTickMarkVisible(false);
-
-
-
-
-
   }
 
   @FXML
   public void submitButtonAction(MouseEvent event) {
-
 
     fdate = firstDate.getValue().toString();
     sdate = secondDate.getValue().toString();
@@ -76,7 +68,6 @@ public class HelloController {
     }
 
     setGraphStyle(series);
-
   }
 
   @FXML
@@ -88,7 +79,6 @@ public class HelloController {
       data.getNode().setStyle("-fx-background-insets: 0,0;");
       data.getNode().setStyle("-fx-background-color: transparent;");
     }
-
   }
 
   @FXML
@@ -108,25 +98,20 @@ public class HelloController {
         });
   }
 
-  public void handleGetSMA(MouseEvent event) {
+  public void handleGet50SMA(MouseEvent event)  {
 
 
-  }
-  public void handleGetEMA(MouseEvent event) {
-
-  }
-  public void handleGetMACD(MouseEvent event) {
 
 
-  }
-  public void handleGetRSI(MouseEvent event) {
+
+
 
 
   }
 
+  public void handleGetEMA(MouseEvent event) {}
 
+  public void handleGetMACD(MouseEvent event) {}
 
-
+  public void handleGetRSI(MouseEvent event) {}
 }
-
-
