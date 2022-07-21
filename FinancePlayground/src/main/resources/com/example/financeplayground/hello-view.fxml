@@ -9,10 +9,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -89,17 +88,8 @@
                         </AnchorPane>
                         <ToolBar prefHeight="40.0" prefWidth="1025.0">
                             <items>
-                        <SplitMenuButton mnemonicParsing="false" text="Indicators">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="50 Day SMA"/>
-                              <MenuItem mnemonicParsing="false" text="200 Day SMA" />
-                            <MenuItem mnemonicParsing="false" text="50 Day EMA" />
-                              <MenuItem mnemonicParsing="false" text="200 Day EMA" />
-                              <MenuItem mnemonicParsing="false" text="MACD" />
-                              <MenuItem mnemonicParsing="false" text="RSI" />
-                          </items>
-                        </SplitMenuButton>
-                        <Button mnemonicParsing="false" text="Clear" onMouseClicked="#handleGet50SMA" />
+                        <ToggleButton fx:id="day50SMA" mnemonicParsing="false" onMouseClicked="#handleGet50SMA" text="50 Day SMA" />
+                        <ToggleButton fx:id="day200SMA" mnemonicParsing="false" onMouseClicked="#handleGet200SMA" text="200 Day SMA" />
                             </items>
                         </ToolBar>
                     </items>
