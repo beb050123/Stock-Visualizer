@@ -1,7 +1,5 @@
 package com.example.financeplayground.data;
 
-import javafx.scene.chart.XYChart;
-
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.*;
@@ -168,22 +166,36 @@ public class DataProcessing {
     return formattedsmaDates;
   }
 
-  public static TreeMap<String, Double> makeSMAMap(TreeMap<String, ArrayList<String>> data ) throws ParseException {
+  public static TreeMap<String, Double> getSimpleMovingAvg(int period, TreeMap<String, ArrayList<String>> data) throws ParseException {
 
-    ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, 50));
+    ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, period));
     ArrayList<Double> prices = new ArrayList<>();
     TreeMap<String, Double> smaMap = new TreeMap<>();
+    SimpleMovingAverage sma = new SimpleMovingAverage(period);
 
     for (ArrayList<String> date : formattedDates) {
       TreeMap<String, ArrayList<String>> stockInfo = getStockInfo(data, date.get(0), date.get(1));
-      String lastKey = stockInfo.keySet().toArray()[stockInfo.keySet().size() - 1].toString();
-      double sum = 0;
+      String key1 = stockInfo.keySet().iterator().next();
       for (String key : stockInfo.keySet()) {
-        sum += Double.parseDouble(stockInfo.get(key).get(3));
+        sma.addData(Double.parseDouble(stockInfo.get(key).get(3)));
 
       }
-      smaMap.put(lastKey, sum / 50);
+      smaMap.put(key1, sma.getMean());
     }
     return smaMap;
+
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
 }
