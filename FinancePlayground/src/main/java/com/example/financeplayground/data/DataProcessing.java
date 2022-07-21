@@ -166,10 +166,10 @@ public class DataProcessing {
     return formattedsmaDates;
   }
 
-  public static TreeMap<String, Double> getSimpleMovingAvg(int period, TreeMap<String, ArrayList<String>> data) throws ParseException {
+  public static TreeMap<String, Double> getSimpleMovingAvg(
+      int period, TreeMap<String, ArrayList<String>> data) throws ParseException {
 
     ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, period));
-    ArrayList<Double> prices = new ArrayList<>();
     TreeMap<String, Double> smaMap = new TreeMap<>();
     SimpleMovingAverage sma = new SimpleMovingAverage(period);
 
@@ -178,24 +178,9 @@ public class DataProcessing {
       String key1 = stockInfo.keySet().iterator().next();
       for (String key : stockInfo.keySet()) {
         sma.addData(Double.parseDouble(stockInfo.get(key).get(3)));
-
       }
       smaMap.put(key1, sma.getMean());
     }
     return smaMap;
-
-
-
-
-
-
-
-
-
   }
-
-
-
-
-
 }
