@@ -107,10 +107,10 @@ public class HelloController {
     sdate = secondDate.getValue().toString();
     stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
     XYChart.Series<String, Double> series = new XYChart.Series<>();
-    TreeMap<String, Double> get50DaySMA = dataProcessing.makeSMAMap(stockInfo);
+    TreeMap<String, Double> get50DaySMA = dataProcessing.getSimpleMovingAvg(50,stockInfo);
 
-  series.setName("50 Day SMA");
-  stockGraph.getData().add(series);
+    series.setName("50 Day SMA");
+    stockGraph.getData().add(series);
     for (String key : get50DaySMA.keySet()) {
       series.getData().add(new XYChart.Data<>(key, get50DaySMA.get(key)));
     }
