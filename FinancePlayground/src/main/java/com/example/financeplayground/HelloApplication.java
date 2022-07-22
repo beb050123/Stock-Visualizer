@@ -22,4 +22,10 @@ public class HelloApplication extends Application {
 
     launch();
   }
+
+  public static void dynamicLayout(Scene scene){
+
+  }
+
+
 }
