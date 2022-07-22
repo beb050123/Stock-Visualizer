@@ -15,7 +15,7 @@ import org.json.simple.parser.ParseException;
 public class JSONParser {
 
 
-  public static void JSONParser(URL url) throws IOException, ParseException {
+  public static TreeMap<String, Double> JSONParser(URL url) throws IOException, ParseException {
 
     TreeMap<String, Double> data = new TreeMap<>();
     org.json.simple.parser.JSONParser jsonParser = new org.json.simple.parser.JSONParser();
@@ -26,6 +26,7 @@ public class JSONParser {
       JSONObject jsonObject2 = (JSONObject) jsonArray.get(i);
       data.put(jsonObject2.get("date").toString(), (Double) jsonObject2.get("close"));
     }
+    return data;
   }
 
 
