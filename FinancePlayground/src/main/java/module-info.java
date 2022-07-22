@@ -6,6 +6,7 @@ module com.example.financeplayground {
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
+    requires json.simple;
 
     opens com.example.financeplayground to javafx.fxml;
     exports com.example.financeplayground;
