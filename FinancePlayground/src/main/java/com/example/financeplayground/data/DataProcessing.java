@@ -1,36 +1,25 @@
 package com.example.financeplayground.data;
 
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
 public class DataProcessing {
 
-  public static TreeMap<String, ArrayList<String>> getData() {
-    TreeMap<String, ArrayList<String>> data = new TreeMap<>();
-    String url =
-        "https://data.nasdaq.com/api/v3/datasets/WIKI/AAPL.csv?api_key=wcWkYaN6xeyyAS7jCxRC";
-    try {
-      InputStream is = new java.net.URL(url).openStream();
-      Scanner scan = new Scanner(is);
-      while (scan.hasNextLine()) {
-        String line = scan.nextLine();
-        String[] lineSplit = line.split(",");
-        String key = lineSplit[0];
-        ArrayList<String> value =
-            new ArrayList<>(Arrays.asList(lineSplit).subList(1, lineSplit.length));
-        data.put(key, value);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public static TreeMap<String, Double> getData(String ticker) throws IOException, org.json.simple.parser.ParseException {
+
+
+    TreeMap<String, Double> data = JSONParser.JSONParser(new URL("https://financialmodelingprep.com/api/v3/historical-price-full/" + ticker + "?serietype=line&apikey=5a24bbe1a002b8075a7f10e7e8850e30"));
+
+
     return data;
   }
 
-  public static TreeMap<String, ArrayList<String>> getStockInfo(
-      TreeMap<String, ArrayList<String>> data, String firstDate, String secondDate) {
-    TreeMap<String, ArrayList<String>> stockInfo = new TreeMap<>();
+  public static TreeMap<String, Double> getStockInfo(
+          TreeMap<String, Double> data, String firstDate, String secondDate) {
+    TreeMap<String, Double> stockInfo = new TreeMap<>();
     for (String key : data.keySet()) {
       if (key.compareTo(firstDate) >= 0 && key.compareTo(secondDate) <= 0) {
         stockInfo.put(key, data.get(key));
@@ -40,7 +29,7 @@ public class DataProcessing {
   }
 
   public static ArrayList<ArrayList<Date>> getSMA(
-      TreeMap<String, ArrayList<String>> data, int period) throws ParseException {
+      TreeMap<String, Double> data, int period) throws ParseException {
 
     ArrayList<ArrayList<Date>> sma = new ArrayList<>();
 
@@ -167,17 +156,17 @@ public class DataProcessing {
   }
 
   public static TreeMap<String, Double> getSimpleMovingAvg(
-      int period, TreeMap<String, ArrayList<String>> data) throws ParseException {
+      int period, TreeMap<String, Double> data) throws ParseException {
 
     ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, period));
     TreeMap<String, Double> smaMap = new TreeMap<>();
     SimpleMovingAverage sma = new SimpleMovingAverage(period);
 
     for (ArrayList<String> date : formattedDates) {
-      TreeMap<String, ArrayList<String>> stockInfo = getStockInfo(data, date.get(0), date.get(1));
+      TreeMap<String, Double> stockInfo = getStockInfo(data, date.get(0), date.get(1));
       String key1 = stockInfo.keySet().iterator().next();
       for (String key : stockInfo.keySet()) {
-        sma.addData(Double.parseDouble(stockInfo.get(key).get(3)));
+        sma.addData(Double.parseDouble(String.valueOf(stockInfo.get(key))));
       }
       smaMap.put(key1, sma.getMean());
     }
