@@ -3,14 +3,12 @@ package com.example.financeplayground;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -30,11 +28,13 @@ public class HelloController {
 
   @FXML private final boolean reset = true;
   @FXML private DatePicker firstDate;
-
+  @FXML private String stockTicker;
   @FXML private DatePicker secondDate;
+  @FXML private TextField tickerSelection;
 
   @FXML DataProcessing dataProcessing = new DataProcessing();
-  @FXML TreeMap<String, ArrayList<String>> data = getData();
+  @FXML
+  TreeMap<String, Double> data;
 
   @FXML private LineChart stockGraph;
 
@@ -47,7 +47,7 @@ public class HelloController {
 
   @FXML String fdate;
   String sdate;
-  TreeMap<String, ArrayList<String>> stockInfo;
+  TreeMap<String, Double> stockInfo;
   XYChart.Series<String, Double> series;
   @FXML XYChart.Series<String, Double> day50SMALine;
   @FXML XYChart.Series<String, Double> day200SMALine;
@@ -62,18 +62,21 @@ public class HelloController {
   }
 
   @FXML
-  public void submitButtonAction(MouseEvent event) {
+  public void submitButtonAction(MouseEvent event) throws IOException, org.json.simple.parser.ParseException {
 
+
+    stockTicker = tickerSelection.getText();
+    data = getData(stockTicker);
     fdate = firstDate.getValue().toString();
     sdate = secondDate.getValue().toString();
     stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
     series = new XYChart.Series<>();
-    series.setName("Stock Price");
+    series.setName(stockTicker);
     stockGraph.getData().add(series);
     chartBackground = stockGraph.lookup(".chart-plot-background");
 
     for (String key : stockInfo.keySet()) {
-      series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).get(3))));
+      series.getData().add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).toString())));
     }
 
     setGraphStyle(series);
