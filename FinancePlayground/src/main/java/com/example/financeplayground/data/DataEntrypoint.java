@@ -13,16 +13,14 @@ import java.util.TreeMap;
 
 public class DataEntrypoint {
 
-  public static void main(String[] args)
-      throws IOException, ParseException, org.json.simple.parser.ParseException {
+  public static void main(String[] args) throws IOException, ParseException, org.json.simple.parser.ParseException {
 
     String ticker = "META";
 
-    TreeMap<String, Double> data =
-        JSONParser.JSONParser(
-            new URL(
-                "https://financialmodelingprep.com/api/v3/historical-price-full/"
-                    + ticker
-                    + "?serietype=line&apikey=5a24bbe1a002b8075a7f10e7e8850e30"));
+    System.out.println(JSONParser.JSONParser(new URL("https://financialmodelingprep.com/api/v3/historical-price-full/" + ticker + "?serietype=line&apikey=5a24bbe1a002b8075a7f10e7e8850e30")));
+
+
+
+
   }
 }
