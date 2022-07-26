@@ -1,5 +1,6 @@
 package com.example.financeplayground;
 
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
@@ -20,6 +21,7 @@ public class HelloController {
   public NumberAxis graphYAxis;
 
   @FXML private ToggleButton day50SMA;
+
   @FXML private ToggleButton day12EMA;
   @FXML private ToggleButton day26EMA;
   @FXML private ToggleButton day200SMA;
@@ -67,6 +69,7 @@ public class HelloController {
       throws IOException, org.json.simple.parser.ParseException {
 
     stockTicker = tickerSelection.getText();
+    stockGraph.setTitle(stockTicker);
     if (stockTicker.length() < 1 || stockTicker.matches("\\d*") || stockTicker.length() > 5) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
