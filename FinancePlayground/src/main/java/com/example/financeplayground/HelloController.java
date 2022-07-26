@@ -1,5 +1,7 @@
 package com.example.financeplayground;
 
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -8,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
 import javafx.scene.layout.VBox;
-
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -20,19 +22,19 @@ public class HelloController {
   public CategoryAxis graphXAxis;
   public NumberAxis graphYAxis;
 
-  @FXML private ToggleButton day50SMA;
+  @FXML private MFXToggleButton day50SMA;
 
-  @FXML private ToggleButton day12EMA;
-  @FXML private ToggleButton day26EMA;
-  @FXML private ToggleButton day200SMA;
+  @FXML private MFXToggleButton day12EMA;
+  @FXML private MFXToggleButton day26EMA;
+  @FXML private MFXToggleButton day200SMA;
 
   @FXML private Label dateLabel;
   @FXML private Label priceLabel;
   @FXML private VBox infoPopUp;
-  @FXML private DatePicker firstDate;
+  @FXML private MFXDatePicker firstDate;
   @FXML private String stockTicker;
-  @FXML private DatePicker secondDate;
-  @FXML private TextField tickerSelection;
+  @FXML private MFXDatePicker secondDate;
+  @FXML private MFXTextField tickerSelection;
 
   @FXML DataProcessing dataProcessing = new DataProcessing();
   @FXML TreeMap<String, Double> data;
