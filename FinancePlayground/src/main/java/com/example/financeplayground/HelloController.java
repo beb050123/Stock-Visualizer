@@ -20,13 +20,13 @@ public class HelloController {
   public NumberAxis graphYAxis;
 
   @FXML private ToggleButton day50SMA;
+  @FXML private ToggleButton day12EMA;
+  @FXML private ToggleButton day26EMA;
   @FXML private ToggleButton day200SMA;
 
   @FXML private Label dateLabel;
   @FXML private Label priceLabel;
   @FXML private VBox infoPopUp;
-
-  @FXML private final boolean reset = true;
   @FXML private DatePicker firstDate;
   @FXML private String stockTicker;
   @FXML private DatePicker secondDate;
@@ -50,6 +50,8 @@ public class HelloController {
   XYChart.Series<String, Double> series;
   @FXML XYChart.Series<String, Double> day50SMALine;
   @FXML XYChart.Series<String, Double> day200SMALine;
+  @FXML private XYChart.Series<String, Double> day12EMALine;
+  @FXML private XYChart.Series<String, Double> day26EMALine;
 
   @FXML
   public void initialize() {
@@ -62,7 +64,7 @@ public class HelloController {
 
   @FXML
   public void submitButtonAction(MouseEvent event)
-          throws IOException, org.json.simple.parser.ParseException {
+      throws IOException, org.json.simple.parser.ParseException {
 
     stockTicker = tickerSelection.getText();
     if (stockTicker.length() < 1 || stockTicker.matches("\\d*") || stockTicker.length() > 5) {
@@ -73,10 +75,30 @@ public class HelloController {
       alert.showAndWait();
       return;
     }
-    data = getData(stockTicker);
-    fdate = firstDate.getValue().toString();
-    // verify that the date is valid
-    if (fdate.length() < 1 || fdate.matches("\\d*") || fdate.length() > 10) {
+    try {
+      data = getData(stockTicker);
+    } catch (RuntimeException e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("No data found");
+      alert.setContentText("Enter a valid ticker symbol");
+      alert.showAndWait();
+      return;
+    }
+
+    try {
+      fdate = firstDate.getValue().toString();
+      sdate = secondDate.getValue().toString();
+    } catch (NullPointerException e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("No data found");
+      alert.setContentText("Enter a valid date range");
+      alert.showAndWait();
+      return;
+    }
+
+    if (fdate.length() < 1 || fdate.length() > 10) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
       alert.setHeaderText("No data found");
@@ -84,8 +106,7 @@ public class HelloController {
       alert.showAndWait();
       return;
     }
-    sdate = secondDate.getValue().toString();
-    if (sdate.length() < 1 || sdate.matches("\\d*") || sdate.length() > 10) {
+    if (sdate.length() < 1 || sdate.length() > 10) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
       alert.setHeaderText("No data found");
@@ -101,8 +122,8 @@ public class HelloController {
 
     for (String key : stockInfo.keySet()) {
       series
-              .getData()
-              .add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).toString())));
+          .getData()
+          .add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).toString())));
     }
 
     setGraphStyle(series);
@@ -124,17 +145,17 @@ public class HelloController {
 
     try {
       chartBackground.setOnMouseMoved(
-              e -> {
-                dateLabel.setText("Date: " + graphXAxis.getValueForDisplay(e.getX()));
-                for (XYChart.Data<String, Double> data : series.getData()) {
-                  if (data.getXValue().equals(graphXAxis.getValueForDisplay(e.getX()))) {
-                    priceLabel.setText("Price: " + data.getYValue());
-                    infoPopUp.setLayoutX(data.getNode().getLayoutX() + 10);
-                    infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
-                  }
-                }
-                infoPopUp.setVisible(true);
-              });
+          e -> {
+            dateLabel.setText("Date: " + graphXAxis.getValueForDisplay(e.getX()));
+            for (XYChart.Data<String, Double> data : series.getData()) {
+              if (data.getXValue().equals(graphXAxis.getValueForDisplay(e.getX()))) {
+                priceLabel.setText("Price: " + data.getYValue());
+                infoPopUp.setLayoutX(data.getNode().getLayoutX() + 10);
+                infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
+              }
+            }
+            infoPopUp.setVisible(true);
+          });
     } catch (Exception e) {
 
     }
@@ -144,9 +165,6 @@ public class HelloController {
 
     try {
       if (day50SMA.isSelected()) {
-        fdate = firstDate.getValue().toString();
-        sdate = secondDate.getValue().toString();
-        stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
         day50SMALine = new XYChart.Series<>();
         TreeMap<String, Double> get50DaySMA;
         try {
@@ -176,9 +194,6 @@ public class HelloController {
 
     try {
       if (day200SMA.isSelected()) {
-        fdate = firstDate.getValue().toString();
-        sdate = secondDate.getValue().toString();
-        stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
         day200SMALine = new XYChart.Series<>();
         TreeMap<String, Double> get200DaySMA;
         try {
@@ -204,9 +219,65 @@ public class HelloController {
     }
   }
 
+  public void handleGet12EMA(MouseEvent event) throws ParseException {
+
+    try {
+      if (day12EMA.isSelected()) {
+        day12EMALine = new XYChart.Series<>();
+        TreeMap<String, Double> get12DayEMA;
+        try {
+          get12DayEMA = dataProcessing.getExponentialMovingAvg(12, stockInfo);
+        } catch (ParseException ex) {
+          throw new RuntimeException(ex);
+        }
+        day12EMALine.setName("12 Day EMA");
+        stockGraph.getData().add(day12EMALine);
+        for (String key : get12DayEMA.keySet()) {
+          day12EMALine.getData().add(new XYChart.Data<>(key, get12DayEMA.get(key)));
+        }
+        setGraphStyle(day12EMALine);
+      } else {
+        stockGraph.getData().remove(day12EMALine);
+      }
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("No data found");
+      alert.setContentText("Please select a date range and ticker symbol");
+      alert.showAndWait();
+    }
+  }
+
+  public void handleGet26EMA(MouseEvent event) throws ParseException {
+
+    try {
+      if (day26EMA.isSelected()) {
+        day26EMALine = new XYChart.Series<>();
+        TreeMap<String, Double> get26DayEMA;
+        try {
+          get26DayEMA = dataProcessing.getExponentialMovingAvg(26, stockInfo);
+        } catch (ParseException ex) {
+          throw new RuntimeException(ex);
+        }
+        day26EMALine.setName("26 Day EMA");
+        stockGraph.getData().add(day26EMALine);
+        for (String key : get26DayEMA.keySet()) {
+          day26EMALine.getData().add(new XYChart.Data<>(key, get26DayEMA.get(key)));
+        }
+        setGraphStyle(day26EMALine);
+      } else {
+        stockGraph.getData().remove(day26EMALine);
+      }
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("No data found");
+      alert.setContentText("Please select a date range and ticker symbol");
+      alert.showAndWait();
+    }
+  }
+
   public void handleGetMACD(MouseEvent event) {}
 
   public void handleGetRSI(MouseEvent event) {}
-
-
 }
