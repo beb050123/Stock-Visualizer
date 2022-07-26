@@ -8,17 +8,21 @@ import java.text.SimpleDateFormat;
 
 public class DataProcessing {
 
-  public static TreeMap<String, Double> getData(String ticker) throws IOException, org.json.simple.parser.ParseException {
+  public static TreeMap<String, Double> getData(String ticker)
+      throws IOException, org.json.simple.parser.ParseException {
 
-
-    TreeMap<String, Double> data = JSONParser.JSONParser(new URL("https://financialmodelingprep.com/api/v3/historical-price-full/" + ticker + "?serietype=line&apikey=5a24bbe1a002b8075a7f10e7e8850e30"));
-
+    TreeMap<String, Double> data =
+        JSONParser.JSONParser(
+            new URL(
+                "https://financialmodelingprep.com/api/v3/historical-price-full/"
+                    + ticker
+                    + "?serietype=line&apikey=5a24bbe1a002b8075a7f10e7e8850e30"));
 
     return data;
   }
 
   public static TreeMap<String, Double> getStockInfo(
-          TreeMap<String, Double> data, String firstDate, String secondDate) {
+      TreeMap<String, Double> data, String firstDate, String secondDate) {
     TreeMap<String, Double> stockInfo = new TreeMap<>();
     for (String key : data.keySet()) {
       if (key.compareTo(firstDate) >= 0 && key.compareTo(secondDate) <= 0) {
@@ -28,19 +32,17 @@ public class DataProcessing {
     return stockInfo;
   }
 
-  public static ArrayList<ArrayList<Date>> getSMA(
-      TreeMap<String, Double> data, int period) throws ParseException {
+  public static ArrayList<ArrayList<Date>> getSMA(TreeMap<String, Double> data, int period)
+      throws ParseException {
 
     ArrayList<ArrayList<Date>> sma = new ArrayList<>();
-
     Stack<Date> dates = new Stack<>();
     String firstDate = data.keySet().iterator().next();
-
-    // TODO - refactor once I get data from Yahoo API
     String secondToLastDate = data.keySet().toArray()[data.keySet().size() - 2].toString();
-    Date lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(secondToLastDate);
-    dates.push(new SimpleDateFormat("yyyy-MM-dd").parse(firstDate));
     Calendar c = Calendar.getInstance();
+    Date lastDate = new SimpleDateFormat("yyyy-MM-dd").parse(secondToLastDate);
+
+    dates.push(new SimpleDateFormat("yyyy-MM-dd").parse(firstDate));
 
     for (String key : data.keySet()) {
       c.setTime(dates.pop());
@@ -155,8 +157,8 @@ public class DataProcessing {
     return formattedsmaDates;
   }
 
-  public static TreeMap<String, Double> getSimpleMovingAvg(
-      int period, TreeMap<String, Double> data) throws ParseException {
+  public static TreeMap<String, Double> getSimpleMovingAvg(int period, TreeMap<String, Double> data)
+      throws ParseException {
 
     ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, period));
     TreeMap<String, Double> smaMap = new TreeMap<>();
@@ -171,5 +173,23 @@ public class DataProcessing {
       smaMap.put(key1, sma.getMean());
     }
     return smaMap;
+  }
+
+  public static TreeMap<String, Double> getExponentialMovingAvg(
+      int period, TreeMap<String, Double> data) throws ParseException {
+
+    ArrayList<ArrayList<String>> formattedDates = makeFormattedDates(getSMA(data, period));
+    TreeMap<String, Double> emaMap = new TreeMap<>();
+    ExponentialMovingAverage ema = new ExponentialMovingAverage(period);
+
+    for (ArrayList<String> date : formattedDates) {
+      TreeMap<String, Double> stockInfo = getStockInfo(data, date.get(0), date.get(1));
+      String key1 = stockInfo.keySet().iterator().next();
+      for (String key : stockInfo.keySet()) {
+        ema.addData(Double.parseDouble(String.valueOf(stockInfo.get(key))));
+      }
+      emaMap.put(key1, ema.calculateEMA());
+    }
+    return emaMap;
   }
 }
