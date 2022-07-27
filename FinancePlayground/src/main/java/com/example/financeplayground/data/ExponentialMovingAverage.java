@@ -27,7 +27,6 @@ public class ExponentialMovingAverage {
     }
   }
 
-  // getema() returns the current EMA value
   public double calculateEMA() {
 
     for (int i = 0; i < Dataset.size(); i++) {
