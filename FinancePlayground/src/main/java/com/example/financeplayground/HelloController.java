@@ -6,11 +6,15 @@ import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 
@@ -324,5 +328,14 @@ public class HelloController {
     }
 
     public void handleGetRSI(MouseEvent event) {
+    }
+
+    public void handleZoomIn(ScrollEvent event) {
+        //TODO - FIX ZOOM IN/OUT
+        Parent parent = chartBackground.getParent();
+
+        for(Node node: parent.getChildrenUnmodifiable()) {
+           System.out.println(node);
+        }
     }
 }
