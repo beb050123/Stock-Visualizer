@@ -1,3 +1,73 @@
-.mfx-button{
-    -fx-background-color: blue;
+#vbox1{
+    -fx-background-color: #00222d;
 }
+#tBar{
+    -fx-background-color: #00222d;
+
+}
+
+#stockGraph{
+    -fx-background-color: #0a313e;
+}
+#day50SMA,#day200SMA,#day12EMA,#day26EMA{
+    -fx-text-fill: #ffffff;
+}
+.mfx-button{
+    -fx-background-color: #0a313e;
+    -mfx-ripple-color: #0a313e;
+    -fx-text-fill: #ffffff;
+    -mfx-button-type: RAISED;
+}
+#displayCharts{
+    -fx-padding: 5 70 5 20;
+    -fx-font: normal 20px "Arial";
+    -fx-border-radius: 0px;
+}
+#displayPortfolio{
+    -fx-padding: 5 56 5 20;
+    -fx-font: normal 20px "Arial";
+    -fx-border-radius: 0px;
+}
+#displayWatchlist{
+    -fx-padding: 5 48 5 20;
+    -fx-font: normal 20px "Arial";
+    -fx-border-radius: 0px;
+}
+#displayNews{
+    -fx-padding: 5 79 5 20;
+    -fx-font: normal 20px "Arial";
+    -fx-border-radius: 0px;
+}
+.mfx-button:hover{
+    -fx-translate-y: -3;
+    -fx-translate-x: -3;
+    -fx-background-color: #3d9b96;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(gaussian, #3d9b96, 10, 0, 0, 0);
+}
+#tickerSelection{
+    -fx-max-height: 5px;
+    -fx-min-height: 30px;
+    -mfx-text-limit: 5;
+    -fx-text-fill: #0a313e;
+
+}
+.mfx-date-picker{
+    -fx-max-height: 5px;
+    -fx-min-height: 30px;
+    -fx-text-fill: #0a313e;
+}
+.mfx-date-picker .date-picker-popup .mfx-date-cell{
+    -fx-background-color: #0a313e;
+    -fx-text-fill: #ffffff;
+}
+.mfx-date-picker .date-picker-popup .mfx-date-cell:hover{
+    -fx-background-color: #3d9b96;
+    -fx-text-fill: #ffffff;
+}
+
+
+
+
+
