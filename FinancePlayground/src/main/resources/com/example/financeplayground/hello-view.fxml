@@ -20,27 +20,12 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
    <left>
           <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
               <children>
-                    <VBox fx:id="infoPopUp" alignment="CENTER" visible="false">
-                        <children>
-                            <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
-                                <children>
-                                    <Label fx:id="dateLabel" text="Date:" textFill="WHITE" />
-                                    <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
-                                </children>
-                                <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                </cursor>
-                                <padding>
-                                    <Insets left="5.0" />
-                                </padding>
-                            </VBox>
-                            <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
-                        </children>
-                    </VBox>
             <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts" />
             <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio" />
             <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist" />
@@ -49,7 +34,9 @@
           </VBox>
    </left>
    <center>
+       <StackPane>
               <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="629.0" prefWidth="1010.0" BorderPane.alignment="CENTER">
+
                   <xAxis>
                       <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
                   </xAxis>
@@ -59,7 +46,9 @@
                   <cursor>
                       <Cursor fx:constant="CROSSHAIR" />
                   </cursor>
+
               </LineChart>
+       </StackPane>
    </center>
    <top>
             <ToolBar fx:id="tBar" prefHeight="40.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
@@ -76,4 +65,24 @@
                 </items>
             </ToolBar>
    </top>
+    <bottom>
+        <VBox fx:id="infoPopUp" alignment="CENTER" visible="false" >
+            <children>
+                <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
+                    <children>
+                        <Label fx:id="dateLabel" text="Date:" textFill="WHITE" />
+                        <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </VBox>
+                <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
+            </children>
+        </VBox>
+    </bottom>
+
 </BorderPane>
