@@ -1,3 +1,14 @@
-# Stock-Visualizer
-A simple java program that displays several key indicators for a stock ticker of your choice.
-To begin, set your run configuration to "HelloApplication", and click run.
+
+# Stonks
+
+A Java program built with JavaFX and styles with CSS that displays the chart of a stock along with several key indicators.
+
+
+
+## To-do
+
+- Add watchlist section
+- Add portfolio section
+- Add news section
+
+
