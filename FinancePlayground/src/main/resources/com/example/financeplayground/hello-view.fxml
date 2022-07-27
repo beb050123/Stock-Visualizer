@@ -22,7 +22,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
    <left>
-          <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
+          <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
               <children>
                     <VBox fx:id="infoPopUp" alignment="CENTER" visible="false">
                         <children>
@@ -41,10 +41,10 @@
                             <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
                         </children>
                     </VBox>
-            <MFXButton mnemonicParsing="false" text="Charts" />
-            <MFXButton mnemonicParsing="false" text="Portfolio" />
-            <MFXButton mnemonicParsing="false" text="Watchlist" />
-            <MFXButton mnemonicParsing="false" text="News" />
+            <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts" />
+            <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio" />
+            <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist" />
+            <MFXButton fx:id="displayNews" mnemonicParsing="false" text="News" />
               </children>
           </VBox>
    </left>
@@ -62,7 +62,7 @@
               </LineChart>
    </center>
    <top>
-            <ToolBar prefHeight="40.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
+            <ToolBar fx:id="tBar" prefHeight="40.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
                 <items>
                   <MFXTextField fx:id="tickerSelection" prefHeight="25.0" prefWidth="98.0" promptText="Enter a Ticker" />
                   <MFXDatePicker fx:id="firstDate" prefHeight="11.0" prefWidth="143.0" promptText="First Date" />

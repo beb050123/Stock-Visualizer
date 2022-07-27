@@ -1,5 +1,6 @@
 package com.example.financeplayground;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.css.PseudoClass;
@@ -9,6 +10,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import java.io.IOException;
@@ -21,6 +23,12 @@ public class HelloController {
 
   public CategoryAxis graphXAxis;
   public NumberAxis graphYAxis;
+  public MFXButton displayPortfolio;
+  public MFXButton displayNews;
+  public MFXButton displayWatchlist;
+  public MFXButton displayCharts;
+    public VBox vbox1;
+  public BorderPane bPane;
 
   @FXML private MFXToggleButton day50SMA;
 
@@ -64,6 +72,7 @@ public class HelloController {
     stockGraph.setAnimated(false);
     stockGraph.setLegendVisible(true);
     graphXAxis.setTickMarkVisible(false);
+
   }
 
   @FXML
@@ -72,7 +81,7 @@ public class HelloController {
 
     stockTicker = tickerSelection.getText();
     stockGraph.setTitle(stockTicker);
-    if (stockTicker.length() < 1 || stockTicker.matches("\\d*") || stockTicker.length() > 5) {
+    if (stockTicker.length() < 1 || stockTicker.matches("\\d*")) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
       alert.setHeaderText("No data found");
