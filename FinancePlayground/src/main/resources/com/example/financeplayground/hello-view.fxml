@@ -5,84 +5,87 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.QuadCurve?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
-
-
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financeplayground.HelloController">
-   <left>
-          <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
-              <children>
-            <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts" />
-            <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio" />
-            <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist" />
-            <MFXButton fx:id="displayNews" mnemonicParsing="false" text="News" />
-              </children>
-          </VBox>
-   </left>
-   <center>
-       <StackPane>
-              <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="629.0" prefWidth="1010.0" BorderPane.alignment="CENTER">
 
-                  <xAxis>
-                      <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false" />
-                  </xAxis>
-                  <yAxis>
-                      <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT" />
-                  </yAxis>
-                  <cursor>
-                      <Cursor fx:constant="CROSSHAIR" />
-                  </cursor>
 
-              </LineChart>
-       </StackPane>
-   </center>
-   <top>
-            <ToolBar fx:id="tBar" prefHeight="40.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
-                <items>
-                  <MFXTextField fx:id="tickerSelection" prefHeight="25.0" prefWidth="98.0" promptText="Enter a Ticker" />
-                  <MFXDatePicker fx:id="firstDate" prefHeight="11.0" prefWidth="143.0" promptText="First Date" />
-                  <MFXDatePicker fx:id="secondDate" prefHeight="25.0" prefWidth="144.0" promptText="Second Date" />
-                  <MFXButton mnemonicParsing="false" onMouseClicked="#submitButtonAction" prefHeight="25.0" prefWidth="124.0" text="Submit" />
-                  <MFXButton fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#setReset" prefHeight="25.0" prefWidth="124.0" text="Reset" />
-                    <MFXToggleButton fx:id="day50SMA" mnemonicParsing="false" onMouseClicked="#handleGet50SMA" text="50 Day SMA" />
-                    <MFXToggleButton fx:id="day200SMA" mnemonicParsing="false" onMouseClicked="#handleGet200SMA" text="200 Day SMA" />
-                    <MFXToggleButton fx:id="day12EMA" mnemonicParsing="false" onMouseClicked="#handleGet12EMA" text="12 Day EMA" />
-                    <MFXToggleButton fx:id="day26EMA" mnemonicParsing="false" onMouseClicked="#handleGet26EMA" text="26 Day EMA" />
-                </items>
-            </ToolBar>
-   </top>
-    <bottom>
-        <VBox fx:id="infoPopUp" alignment="CENTER" visible="false" >
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.financeplayground.HelloController">
+    <left>
+        <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0"
+              prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: grey; -fx-background-radius: 4;">
-                    <children>
-                        <Label fx:id="dateLabel" text="Date:" textFill="WHITE" />
-                        <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE" />
-                    </children>
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </VBox>
-                <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0" stroke="WHITE" strokeType="INSIDE" />
+                <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts"/>
+                <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio"/>
+                <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist"/>
+                <MFXButton fx:id="displayNews" mnemonicParsing="false" text="News"/>
             </children>
         </VBox>
-    </bottom>
+    </left>
+    <center>
+        <AnchorPane>
+            <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="970.0" prefWidth="1757.0"
+                       BorderPane.alignment="CENTER">
+                <xAxis>
+                    <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="graphYAxis" label="Price" side="LEFT"/>
+                </yAxis>
+                <cursor>
+                    <Cursor fx:constant="CROSSHAIR"/>
+                </cursor>
+            </LineChart>
+            <VBox fx:id="infoPopUp" alignment="CENTER" visible="false">
+                <children>
+                    <VBox prefHeight="38.0" prefWidth="109.0"
+                          style="-fx-background-color: grey; -fx-background-radius: 4;">
+                        <children>
+                            <Label fx:id="dateLabel" text="Date:" textFill="WHITE"/>
+                            <Label fx:id="priceLabel" layoutX="10.0" layoutY="10.0" text="Price:" textFill="WHITE"/>
+                        </children>
+                        <cursor>
+                            <Cursor fx:constant="DEFAULT"/>
+                        </cursor>
+                        <padding>
+                            <Insets left="5.0"/>
+                        </padding>
+                    </VBox>
+                    <QuadCurve controlY="-19.0" endX="6.0" endY="-47.0" fill="#777f86" startX="-8.0" startY="-47.0"
+                               stroke="WHITE" strokeType="INSIDE"/>
+                </children>
+            </VBox>
+        </AnchorPane>
+    </center>
+    <top>
+        <ToolBar fx:id="tBar" prefHeight="40.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
+            <items>
+                <MFXTextField fx:id="tickerSelection" prefHeight="25.0" prefWidth="98.0" promptText="Enter a Ticker"/>
+                <MFXDatePicker fx:id="firstDate" prefHeight="11.0" prefWidth="143.0" promptText="First Date"/>
+                <MFXDatePicker fx:id="secondDate" prefHeight="25.0" prefWidth="144.0" promptText="Second Date"/>
+                <MFXButton mnemonicParsing="false" onMouseClicked="#submitButtonAction" prefHeight="25.0"
+                           prefWidth="124.0" text="Submit"/>
+                <MFXButton fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#setReset" prefHeight="25.0"
+                           prefWidth="124.0" text="Reset"/>
+                <MFXToggleButton fx:id="day50SMA" mnemonicParsing="false" onMouseClicked="#handleGet50SMA"
+                                 text="50 Day SMA"/>
+                <MFXToggleButton fx:id="day200SMA" mnemonicParsing="false" onMouseClicked="#handleGet200SMA"
+                                 text="200 Day SMA"/>
+                <MFXToggleButton fx:id="day12EMA" mnemonicParsing="false" onMouseClicked="#handleGet12EMA"
+                                 text="12 Day EMA"/>
+                <MFXToggleButton fx:id="day26EMA" mnemonicParsing="false" onMouseClicked="#handleGet26EMA"
+                                 text="26 Day EMA"/>
+            </items>
+        </ToolBar>
+    </top>
+
 
 </BorderPane>
