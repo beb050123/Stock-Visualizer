@@ -63,12 +63,6 @@ public class HelloController {
 
     @FXML
     private LineChart stockGraph;
-
-    @FXML
-    public void setReset() {
-        stockGraph.getData().clear();
-    }
-
     @FXML
     Node chartBackground;
 
@@ -86,6 +80,7 @@ public class HelloController {
     @FXML
     private XYChart.Series<String, Double> day26EMALine;
 
+
     @FXML
     public void initialize() {
         stockGraph.setVerticalGridLinesVisible(false);
@@ -93,7 +88,19 @@ public class HelloController {
         stockGraph.setAnimated(false);
         stockGraph.setLegendVisible(true);
         graphXAxis.setTickMarkVisible(false);
+    }
 
+    @FXML
+    public void setReset() {
+        stockGraph.getData().clear();
+        tickerSelection.setText("");
+        firstDate.setValue(null);
+        secondDate.setValue(null);
+        day50SMA.setSelected(false);
+        day12EMA.setSelected(false);
+        day26EMA.setSelected(false);
+        day200SMA.setSelected(false);
+        infoPopUp.setVisible(false);
     }
 
     @FXML
@@ -160,8 +167,8 @@ public class HelloController {
                     .getData()
                     .add(new XYChart.Data<>(key, Double.parseDouble(stockInfo.get(key).toString())));
         }
-
         setGraphStyle(series);
+
     }
 
     @FXML
@@ -177,7 +184,6 @@ public class HelloController {
 
     @FXML
     public void onMouseOver(MouseEvent event) {
-
         try {
             chartBackground.setOnMouseMoved(
                     e -> {
@@ -189,7 +195,9 @@ public class HelloController {
                                 infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
                             }
                         }
-                        infoPopUp.setVisible(true);
+                        if(firstDate.getValue() != null && secondDate.getValue() != null) {
+                            infoPopUp.setVisible(true);
+                        }
                     });
         } catch (Exception e) {
 
