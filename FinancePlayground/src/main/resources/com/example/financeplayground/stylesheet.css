@@ -1,3 +1,11 @@
+.axis-label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
 
 #vbox1 {
     -fx-background-color: #00222d;
@@ -10,6 +18,7 @@
 
 #stockGraph {
     -fx-background-color: #00222d;
+    -fx-text-fill: white;
 }
 
 .chart-plot-background {
