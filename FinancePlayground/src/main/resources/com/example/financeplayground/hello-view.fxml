@@ -33,7 +33,7 @@
     <center>
         <AnchorPane>
             <LineChart fx:id="stockGraph" onMouseMoved="#onMouseOver" prefHeight="970.0" prefWidth="1757.0"
-                       BorderPane.alignment="CENTER">
+                       BorderPane.alignment="CENTER" onScroll="#handleZoomIn">
                 <xAxis>
                     <CategoryAxis fx:id="graphXAxis" label="Dates" side="BOTTOM" tickLabelsVisible="false"/>
                 </xAxis>
@@ -86,6 +86,4 @@
             </items>
         </ToolBar>
     </top>
-
-
 </BorderPane>
