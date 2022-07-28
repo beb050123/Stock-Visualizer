@@ -3,18 +3,15 @@ package com.example.financeplayground;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
-import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import com.example.financeplayground.data.DataProcessing;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 
@@ -34,6 +31,7 @@ public class HelloController {
     public MFXButton displayCharts;
     public VBox vbox1;
     public BorderPane bPane;
+    public AnchorPane centerContainer;
 
     @FXML
     private MFXToggleButton day50SMA;
@@ -66,7 +64,7 @@ public class HelloController {
     TreeMap<String, Double> data;
 
     @FXML
-    private LineChart stockGraph;
+    LineChart stockGraph;
     @FXML
     Node chartBackground;
 
@@ -199,7 +197,7 @@ public class HelloController {
                                 infoPopUp.setLayoutY(data.getNode().getLayoutY() - infoPopUp.getHeight());
                             }
                         }
-                        if(firstDate.getValue() != null && secondDate.getValue() != null) {
+                        if (firstDate.getValue() != null && secondDate.getValue() != null) {
                             infoPopUp.setVisible(true);
                         }
                     });
@@ -331,11 +329,14 @@ public class HelloController {
     }
 
     public void handleZoomIn(ScrollEvent event) {
-        //TODO - FIX ZOOM IN/OUT
-        Parent parent = chartBackground.getParent();
-
-        for(Node node: parent.getChildrenUnmodifiable()) {
-           System.out.println(node);
+        if (event.getDeltaY() < 0) {
+            graphXAxis.setScaleX(graphXAxis.getScaleX() * 1.1);
+            graphXAxis.setScaleY(graphXAxis.getScaleY() * 1.1);
+        } else if (event.getDeltaY() > 0) {
+            stockGraph.setScaleX(stockGraph.getScaleX() * 0.9);
+            stockGraph.setScaleY(stockGraph.getScaleY() * 0.9);
         }
     }
+
+
 }
