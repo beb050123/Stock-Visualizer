@@ -1,7 +1,12 @@
+#rootBPane {
+    -fx-background-color: #00222d;
+}
+
 .axis-label {
     -fx-text-fill: white;
     -fx-font-size: 20px;
 }
+
 .chart-title {
     -fx-text-fill: white;
     -fx-font-size: 20px;
@@ -14,11 +19,14 @@
 
 #tBar {
     -fx-background-color: #00222d;
+    -fx-spacing: 10;
 }
+
 
 #stockGraph {
     -fx-background-color: #00222d;
     -fx-text-fill: white;
+    -fx-padding: 33 0 0 0;
 }
 
 .chart-plot-background {
