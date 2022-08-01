@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.QuadCurve?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.financeplayground.PortfolioController" BorderPane.alignment="CENTER"
+            fx:id="rootBPane">
+    <left>
+        <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0"
+              prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="displayCharts" mnemonicParsing="false" text="Charts" onMouseClicked="#handleMenuClick"/>
+                <Button fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio" onMouseClicked="#handleMenuClick"/>
+                <Button fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist" onMouseClicked="#handleMenuClick"/>
+                <Button fx:id="displayNews" mnemonicParsing="false" text="News" onMouseClicked="#handleMenuClick"/>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <GridPane>
+        </GridPane>
+    </center>
+    <top>
+        <ToolBar>
+            <items>
+
+            </items>
+        </ToolBar>
+    </top>
+</BorderPane>

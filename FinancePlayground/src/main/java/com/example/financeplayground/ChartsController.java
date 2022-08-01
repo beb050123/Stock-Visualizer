@@ -4,7 +4,10 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -14,14 +17,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 import static com.example.financeplayground.data.DataProcessing.*;
 
-public class HelloController {
+public class ChartsController {
 
     public CategoryAxis graphXAxis;
     public NumberAxis graphYAxis;
@@ -344,14 +349,41 @@ public class HelloController {
     }
 
     public void handleZoomIn(ScrollEvent event) {
-        if (event.getDeltaY() < 0) {
-            graphXAxis.setScaleX(graphXAxis.getScaleX() * 1.1);
-            graphXAxis.setScaleY(graphXAxis.getScaleY() * 1.1);
-        } else if (event.getDeltaY() > 0) {
-            stockGraph.setScaleX(stockGraph.getScaleX() * 0.9);
-            stockGraph.setScaleY(stockGraph.getScaleY() * 0.9);
-        }
+        // TODO - Fix zoom in functionality
     }
+
+    public void handleMenuClick(MouseEvent e){
+        if(e.getTarget().toString().contains("Portfolio")){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("portfolio.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 1600,900);
+                scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("stylesheet.css")).toExternalForm());
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+
+            }
+        }
+        if(e.getTarget().toString().contains("Charts")){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("charts.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 1600,900);
+                scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("stylesheet.css")).toExternalForm());
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+
+            }
+        }
+
+
+    }
+
+
 
 
 }
