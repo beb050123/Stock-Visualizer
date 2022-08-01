@@ -12,3 +12,4 @@ A Java program built with JavaFX and styles with CSS that displays the chart of 
 - Add news section
 
 
+ 
