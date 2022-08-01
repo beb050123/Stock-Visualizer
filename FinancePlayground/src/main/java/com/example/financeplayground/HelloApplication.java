@@ -37,26 +37,16 @@ public class HelloApplication extends Application {
         stage.show();
 
 
-
-
-
-
-
-
-
-
-
-
         // Resizing handlers //
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             double width = newVal.doubleValue();
             double height = charts.getHeight() - 30;
             controller.stockGraph.setPrefSize(width, height);
-            controller.stockGraph.setMaxWidth(width - 200);
+            controller.stockGraph.setMaxWidth(width - 40);
         });
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
             double height = newVal.doubleValue() - 70;
-            double width = charts.getWidth() - 150;
+            double width = charts.getWidth() - 20;
             controller.stockGraph.setPrefSize(width, height);
         });
 
