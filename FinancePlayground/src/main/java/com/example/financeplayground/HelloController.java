@@ -111,6 +111,11 @@ public class HelloController {
 
         stockTicker = tickerSelection.getText();
         stockGraph.setTitle(stockTicker);
+
+
+
+
+
         if (stockTicker.length() < 1 || stockTicker.matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -119,16 +124,7 @@ public class HelloController {
             alert.showAndWait();
             return;
         }
-        try {
-            data = getData(stockTicker);
-        } catch (RuntimeException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No data found");
-            alert.setContentText("Enter a valid ticker symbol");
-            alert.showAndWait();
-            return;
-        }
+        if (ExceptionHandling()) return;
 
         try {
             fdate = firstDate.getValue().toString();
@@ -161,6 +157,11 @@ public class HelloController {
         stockInfo = DataProcessing.getStockInfo(data, fdate, sdate);
         series = new XYChart.Series<>();
         series.setName(stockTicker);
+
+
+
+
+
         stockGraph.getData().add(series);
         chartBackground = stockGraph.lookup(".chart-plot-background");
 
@@ -171,6 +172,20 @@ public class HelloController {
         }
         setGraphStyle(series);
 
+    }
+
+    private boolean ExceptionHandling() throws IOException, org.json.simple.parser.ParseException {
+        try {
+            data = getData(stockTicker);
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No data found");
+            alert.setContentText("Enter a valid ticker symbol");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 
     @FXML
