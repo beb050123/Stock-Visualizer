@@ -15,20 +15,18 @@
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
 <?import javafx.scene.layout.GridPane?>
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.financeplayground.HelloController" BorderPane.alignment="CENTER"
+            fx:controller="com.example.financeplayground.ChartsController" BorderPane.alignment="CENTER"
             fx:id="rootBPane">
     <left>
         <VBox fx:id="vbox1" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0"
               prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts"/>
-                <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio"/>
-                <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist"/>
-                <MFXButton fx:id="displayNews" mnemonicParsing="false" text="News"/>
+                <MFXButton fx:id="displayCharts" mnemonicParsing="false" text="Charts" onMouseClicked="#handleMenuClick"/>
+                <MFXButton fx:id="displayPortfolio" mnemonicParsing="false" text="Portfolio" onMouseClicked="#handleMenuClick"/>
+                <MFXButton fx:id="displayWatchlist" mnemonicParsing="false" text="Watchlist" onMouseClicked="#handleMenuClick"/>
+                <MFXButton fx:id="displayNews" mnemonicParsing="false" text="News" onMouseClicked="#handleMenuClick"/>
             </children>
         </VBox>
     </left>
