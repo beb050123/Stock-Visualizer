@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.StreamSupport;
 
@@ -117,9 +118,15 @@ public class ChartsController {
         stockTicker = tickerSelection.getText();
         stockGraph.setTitle(stockTicker);
 
+        if (stockGraph.getData().size() > 0) {
+            stockGraph.getData().clear();
+        }
 
-
-
+        if (firstDate.getValue().isAfter(secondDate.getValue())) {
+            LocalDate temp = firstDate.getValue();
+            firstDate.setValue(secondDate.getValue());
+            secondDate.setValue(temp);
+        }
 
         if (stockTicker.length() < 1 || stockTicker.matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
