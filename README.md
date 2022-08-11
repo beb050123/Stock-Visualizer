@@ -5,11 +5,9 @@ A Java program built with JavaFX and styles with CSS that displays the chart of 
 
 
 
-## To-do
+## Usage
 
-- Add watchlist section
-- Add portfolio section
-- Add news section
-
+Set your run configuration to the "HelloApplication.java"
+If the maven dependencies don't automaticall download, install them manually from the pom.xml file
 
  
